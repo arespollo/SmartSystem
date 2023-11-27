@@ -1,24 +1,27 @@
-package com.mysql.smart.entity;
+package com.mysql.smart.domain;
+
 import com.mysql.smart.util.PwdHash;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(unique = true, nullable = false, length = 255)
-    private String username;
+    private String userName;
     @Column(nullable = false, length = 255)
     private String password;
 
     private static final PwdHash pwdHash = new PwdHash();
+
     public User() {
     }
+
     public User(int id, String username, String password) {
         this.id = id;
-        this.username = username;
+        this.userName = username;
         this.password = password;
     }
 
@@ -34,12 +37,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -49,5 +52,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

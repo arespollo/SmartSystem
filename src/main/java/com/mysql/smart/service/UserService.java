@@ -1,8 +1,8 @@
 package com.mysql.smart.service;
 
-import com.mysql.smart.entity.User;
+import com.mysql.smart.domain.User;
 
-public interface UserLoginService {
+public interface UserService {
 
     // 用户注册方法
     User register(User user);
