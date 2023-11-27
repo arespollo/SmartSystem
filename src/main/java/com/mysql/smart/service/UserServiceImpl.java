@@ -5,6 +5,8 @@ import com.mysql.smart.repository.UserDao;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -13,8 +15,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-        if (userDao.findByUserName(user.getUserName()) == null) {
-            return null;
+        Optional<User> existingUser = userDao.findByUserName(user.getUserName());
+        if (existingUser.isPresent()) {
+            return null; // 用户已存在
         } else {
             // 哈希用户密码  自动加盐
             user.setPassword(User.getPwdHash().hashPassword(user.getPassword()));
