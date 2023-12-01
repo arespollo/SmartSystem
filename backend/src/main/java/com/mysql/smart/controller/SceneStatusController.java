@@ -2,6 +2,7 @@ package com.mysql.smart.controller;
 
 import com.mysql.smart.domain.SceneStatus;
 import com.mysql.smart.service.SceneStatusService;
+import com.mysql.smart.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,28 +13,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import static com.mysql.smart.util.ErrorCode.*;
 @RestController
-@RequestMapping("/api/scene")
+@RequestMapping("/api/secure/scene")
 public class SceneStatusController {
     @Autowired
     private SceneStatusService sceneStatusService;
-    @PostMapping("/query-status")
-    public Map<String,Object> query(){
+    @PostMapping("/queryStatus")
+    public Result<List<SceneStatus>> query(){
         List<SceneStatus> sceneStatusList = sceneStatusService.findAll();
-        Map<String, Object> response = new HashMap<>();
-        response.put("code", "0");
-        response.put("msg", "查询成功！");
-        response.put("data", sceneStatusList);
-        return response;
+        return Result.success(sceneStatusList, "查询成功！");
     }
-    @PutMapping("/update-status")
-    public Map<String, Object> updateStatus(@RequestBody SceneStatus sceneStatus) {
+    @PutMapping("/updateStatus")
+    public Result<String> updateStatus(@RequestBody SceneStatus sceneStatus) {
         sceneStatusService.updateSceneStatus(sceneStatus);
-        Map<String, Object> response = new HashMap<>();
-        response.put("code", 0);
-        response.put("msg", "更新成功");
-        return response;
+        return Result.success("更新成功");
     }
 
 

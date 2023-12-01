@@ -4,10 +4,14 @@ public enum ErrorCode {
 
     ACCOUNT_ALREADY_EXIST(101, "用户名已存在"),
     ACCOUNT_PWD_NOT_EXIST(102, "用户名或密码不存在"),
-    TOKEN_ERROR(103, "Toekn不合法"),
+
+    ADDFUR_ERROR(103, "增加家具失败"),
+    DELFUR_ERROR(104, "删除家具失败"),
+
     NO_PERMISSION(701, "无访问权限"),
-    SESSION_TIME_OUT(901, "会话超时"),
-    NO_LOGIN(902, "未登录"),
+    TOKEN_ERROR(901, "Toekn不合法"),
+    SESSION_TIME_OUT(902, "会话超时"),
+    NO_LOGIN(903, "未登录"),
     ;
 
     private String code;
