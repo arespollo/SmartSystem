@@ -63,4 +63,11 @@ public class Result<T> {
         result.setMsg(msg);
         return result;
     }
+
+    public static Result error(ErrorCode errorCode) {
+        Result result = new Result();
+        result.setCode(errorCode.getCode());
+        result.setMsg(errorCode.getMsg());
+        return result;
+    }
 }
