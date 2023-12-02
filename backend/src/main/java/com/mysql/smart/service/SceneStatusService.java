@@ -5,7 +5,7 @@ import com.mysql.smart.domain.SceneStatus;
 import java.util.List;
 
 public interface SceneStatusService{
-    List<SceneStatus> findAll();
+    List<SceneStatus> findAllByUserId(int userId);
 
     void updateSceneStatus(SceneStatus sceneStatus);
 

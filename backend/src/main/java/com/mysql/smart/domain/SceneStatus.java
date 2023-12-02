@@ -12,11 +12,22 @@ public class SceneStatus {
     private String scene;
     @Column
     private int status;
+    @JoinColumn
+    private int userId;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
     public SceneStatus() {
         // 无参构造函数
     }
-    public SceneStatus(int id, String scene, int status) {
-        this.id = id;
+    public SceneStatus(int userId, String scene, int status) {
+        this.userId = userId;
         this.scene = scene;
         this.status = status;
     }

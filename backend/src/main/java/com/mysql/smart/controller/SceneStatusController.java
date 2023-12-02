@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,22 +18,20 @@ public class SceneStatusController {
     @Autowired
     private SceneStatusService sceneStatusService;
     @PostMapping("/query-status")
-    public Map<String,Object> query(){
-        List<SceneStatus> sceneStatusList = sceneStatusService.findAll();
+    public Map<String,Object> query(@RequestBody SceneStatus scenestatus){
+        List<SceneStatus> sceneStatusList = sceneStatusService.findAllByUserId(scenestatus.getUserId());
         Map<String, Object> response = new HashMap<>();
-        response.put("code", "0");
+        response.put("code", "1");
         response.put("msg", "查询成功！");
         response.put("data", sceneStatusList);
         return response;
     }
-    @PutMapping("/update-status")
+    @PostMapping("/update-status")
     public Map<String, Object> updateStatus(@RequestBody SceneStatus sceneStatus) {
         sceneStatusService.updateSceneStatus(sceneStatus);
         Map<String, Object> response = new HashMap<>();
-        response.put("code", 0);
+        response.put("code", 1);
         response.put("msg", "更新成功");
         return response;
     }
-
-
 }

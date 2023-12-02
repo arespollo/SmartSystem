@@ -10,5 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface SceneStatusDao extends JpaRepository<SceneStatus,Long> {
-    List<SceneStatus> findAll();
+    List<SceneStatus> findAllByUserId(int userId);
+    SceneStatus findByUserIdAndScene(int userId, String scene);
+
 }
