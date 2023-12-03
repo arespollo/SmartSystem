@@ -42,7 +42,12 @@ public class Result<T> {
         result.setMsg("成功");
         return result;
     }
-
+    public static Result success(String msg) {
+        Result result = new Result<>();
+        result.setCode("0");
+        result.setMsg(msg);
+        return result;
+    }
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>(data);
         result.setCode("0");
@@ -61,6 +66,13 @@ public class Result<T> {
         Result result = new Result();
         result.setCode(code);
         result.setMsg(msg);
+        return result;
+    }
+
+    public static Result error(ErrorCode errorCode) {
+        Result result = new Result();
+        result.setCode(errorCode.getCode());
+        result.setMsg(errorCode.getMsg());
         return result;
     }
 }

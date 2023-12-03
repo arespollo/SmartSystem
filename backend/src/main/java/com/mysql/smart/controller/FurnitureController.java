@@ -1,7 +1,6 @@
 package com.mysql.smart.controller;
 
 import com.mysql.smart.domain.Furniture;
-import com.mysql.smart.domain.SceneStatus;
 
 import com.mysql.smart.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,39 +10,30 @@ import com.mysql.smart.service.FurnitureService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
+import static com.mysql.smart.util.ErrorCode.*;
 @RestController
-@RequestMapping("/api/main/furniture")
+@RequestMapping("/api/secure/furniture")
 public class FurnitureController {
 
     @Autowired
     private FurnitureService furnitureService;
-    @PostMapping("/addfur")
+    @PostMapping("/addFur")
     public Result<Furniture> addFurniture(@RequestBody Furniture furniture) {
         Furniture fur = furnitureService.addFurniture(furniture);
         if (fur != null) {
             return Result.success(fur, "增加成功！");
         } else {
-            return Result.error("105", "增加失败！");
+            return Result.error(ADDFUR_ERROR);
         }
     }
 
-    @PostMapping("/delfur")
+    @PostMapping("/delFur")
     public Result<Furniture> delFurniture(@RequestBody Furniture furniture) {
         Furniture fur = furnitureService.delFurniture(furniture);
         if (fur != null) {
             return Result.success(fur, "删除成功！");
         } else {
-            return Result.error("105", "删除失败！");
+            return Result.error(DELFUR_ERROR);
         }
     }
 
