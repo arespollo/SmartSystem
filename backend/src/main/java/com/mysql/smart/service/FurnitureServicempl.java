@@ -2,7 +2,6 @@ package com.mysql.smart.service;
 
 import com.mysql.smart.domain.Furniture;
 import com.mysql.smart.repository.FurnitureDao;
-import com.mysql.smart.repository.SceneStatusDao;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

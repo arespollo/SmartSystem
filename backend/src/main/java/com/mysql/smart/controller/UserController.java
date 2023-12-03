@@ -38,7 +38,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/updatescene")
+    @PostMapping("/update-scene")
     public Result<User> updatescene(@RequestBody Map<String,Object>fields){
         int id=(int)fields.get("id");
         String field = (String) fields.get("scene");
@@ -51,7 +51,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/queryscene")
+    @PostMapping("/query-scene")
     public Result<User> queryscene(@RequestBody Map<String,Object>fields){
         int id=(int)fields.get("id");
         User user1=userService.querySceneStatus(id);
