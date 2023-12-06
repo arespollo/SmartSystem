@@ -15,4 +15,7 @@ public interface UserService {
 
     // 其他可能的业务方法
     // ...
+    User updateSceneStatus(long id,String scene,int status);
+
+    User querySceneStatus(long id);
 }

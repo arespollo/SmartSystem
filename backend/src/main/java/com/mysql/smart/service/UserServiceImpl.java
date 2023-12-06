@@ -49,4 +49,26 @@ public class UserServiceImpl implements UserService {
 
     // 其他方法的实现
     // ...
+    @Override
+    public User updateSceneStatus(long id,String scene,int status){
+        User user=userDao.findById(id).orElse(null);
+        if(user!=null){
+            user.updateUserSceneStatus(id,scene,status);
+            userDao.save(user);
+            user.setPassword("");
+            return user;
+        }
+        return null;
+    }
+
+    @Override
+    public User querySceneStatus(long id){
+        User user=userDao.findById(id).orElse(null);
+        if(user!=null){
+            user.setPassword("");
+            return user;
+        }
+        return null;
+    }
+
 }
