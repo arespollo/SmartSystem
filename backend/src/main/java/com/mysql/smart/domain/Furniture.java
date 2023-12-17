@@ -1,5 +1,6 @@
 package com.mysql.smart.domain;
 
+
 import jakarta.persistence.*;
 
 @Entity
@@ -51,7 +52,9 @@ public class Furniture {
     @Column(length = 255)
     private String type;
     @Column
+
     private int status;
+    //@NotBlank(message = "名称不能为空")
     @Column(length = 255)
     private String location;
     private int roomId;
