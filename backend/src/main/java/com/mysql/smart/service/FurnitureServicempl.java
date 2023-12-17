@@ -1,7 +1,9 @@
 package com.mysql.smart.service;
 
 import com.mysql.smart.domain.Furniture;
+import com.mysql.smart.domain.ScheduledTask;
 import com.mysql.smart.repository.FurnitureDao;
+import com.mysql.smart.repository.ScheduledTaskDao;
 import io.micrometer.common.util.StringUtils;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
@@ -10,7 +12,10 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.stereotype.Service;
 
 import java.beans.PropertyDescriptor;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -18,6 +23,13 @@ public class FurnitureServicempl implements FurnitureService{
 
     @Resource
     private FurnitureDao furnitureDao;
+    private final ScheduledTaskDao scheduledTaskDao;
+
+    public FurnitureServicempl(FurnitureDao furnitureDao, ScheduledTaskDao scheduledTaskDao) {
+        this.furnitureDao = furnitureDao;
+        this.scheduledTaskDao = scheduledTaskDao;
+    }
+
     @Override
     public Furniture addFurniture(Furniture furniture) {
         // 执行家具添加的逻辑，比如保存到数据库或执行其他操作
@@ -35,10 +47,10 @@ public class FurnitureServicempl implements FurnitureService{
     }
 
     @Override
-    public Furniture queryFurniture(Furniture furniture) {
-        furnitureDao.findAll();
-        //System.out.println("查找到家具：" + furniture.getId()+furniture.getLocation()+furniture.getLocation());
-        return furniture;
+    public Optional<Furniture> queryFurniture(Furniture furniture) {
+        //furnitureDao.findById(furniture.getId());
+        //System.out.println("查找到家具：" + furniture.getId()+furniture.getName()+furniture.getType());
+        return furnitureDao.findById(furniture.getId());
     }
 
 
@@ -71,6 +83,34 @@ public class FurnitureServicempl implements FurnitureService{
         }
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);
+    }
+
+
+    @Override
+    public List<ScheduledTask> getScheduledTasks(Long furnitureId) {
+        return scheduledTaskDao.findByFurnitureId(furnitureId);
+    }
+
+
+
+    @Override
+    public ScheduledTask scheduleTask(Long furnitureId, LocalDateTime startTime) {
+        Furniture furniture = furnitureDao.findById(furnitureId).orElse(null);
+
+        if (furniture != null) {
+            ScheduledTask task = new ScheduledTask();
+            task.setFurniture(furniture);
+            task.setStartTime(startTime);
+            task.setActive(true);
+            return scheduledTaskDao.save(task);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void cancelScheduledTask(Long taskId) {
+        scheduledTaskDao.deleteById(taskId);
     }
     /*@Override
     public User querySceneStatus(long id){

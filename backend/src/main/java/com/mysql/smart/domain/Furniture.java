@@ -3,10 +3,12 @@ package com.mysql.smart.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "furniture")
 public class Furniture {
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -59,6 +61,9 @@ public class Furniture {
     //@NotBlank(message = "名称不能为空")
     @Column
     private int roomId;
+    @OneToMany(mappedBy = "furniture", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScheduledTask> scheduledTasks;
+
 
     public Furniture(String type, int status, String name, int roomId) {
         this.type = type;

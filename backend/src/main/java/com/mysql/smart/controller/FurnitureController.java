@@ -2,6 +2,7 @@ package com.mysql.smart.controller;
 
 import com.mysql.smart.domain.Furniture;
 
+import com.mysql.smart.domain.ScheduledTask;
 import com.mysql.smart.service.FurnitureService;
 import com.mysql.smart.util.ErrorCode;
 import com.mysql.smart.util.Result;
@@ -12,7 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.mysql.smart.util.ErrorCode.*;
 @RestController
@@ -78,7 +81,7 @@ public class FurnitureController {
 
     @PostMapping("/queryFur")
     public Result queryFurniture(@RequestBody Furniture furniture) {
-        Furniture fur = furnitureService.queryFurniture(furniture);
+        Optional<Furniture> fur = furnitureService.queryFurniture(furniture);
         if (fur != null) {
             return Result.success(fur, "查找成功！");
         } else {
@@ -97,6 +100,24 @@ public class FurnitureController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Result.error(ErrorCode.valueOf("未找到要更新的家具。")));
         }
     }
+
+    @GetMapping("/scheduled-tasks/{furnitureId}")
+    public List<ScheduledTask> getScheduledTasks(@PathVariable Long furnitureId) {
+        return furnitureService.getScheduledTasks(furnitureId);
+    }
+
+    @PostMapping("/schedule-task/{furnitureId}")
+    public ScheduledTask scheduleTask(@PathVariable Long furnitureId, @RequestBody LocalDateTime startTime) {
+        return furnitureService.scheduleTask(furnitureId, startTime);
+    }
+
+    @PostMapping("/cancel-scheduled-task/{taskId}")
+    public void cancelScheduledTask(@PathVariable Long taskId) {
+        furnitureService.cancelScheduledTask(taskId);
+    }
+
+
+
     private String generateErrorMessage(List<FieldError> fieldErrors) {
         StringBuilder errorMessage = new StringBuilder();
         for (FieldError fieldError : fieldErrors) {
