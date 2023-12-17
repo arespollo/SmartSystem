@@ -112,6 +112,11 @@ public class FurnitureServicempl implements FurnitureService{
     public void cancelScheduledTask(Long taskId) {
         scheduledTaskDao.deleteById(taskId);
     }
+
+    @Override
+    public List<Furniture> queryFurniturnByUserId(int userid) {
+        return furnitureDao.findByUserId(userid);
+    }
     /*@Override
     public User querySceneStatus(long id){
         User user=userDao.findById(id).orElse(null);

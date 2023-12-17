@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 
 public interface FurnitureDao extends JpaRepository<Furniture,Long> {
-
+    List<Furniture> findByUserId(long UserId);
     /*List<Furniture> furnitureList = null;
     //Furniture update(Furniture furniture);
     public default Furniture update(Furniture updatedFurniture) {

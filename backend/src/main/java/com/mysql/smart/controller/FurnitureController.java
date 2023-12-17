@@ -2,7 +2,6 @@ package com.mysql.smart.controller;
 
 import com.mysql.smart.domain.Furniture;
 
-import com.mysql.smart.domain.ScheduledTask;
 import com.mysql.smart.service.FurnitureService;
 import com.mysql.smart.util.ErrorCode;
 import com.mysql.smart.util.Result;
@@ -13,8 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.mysql.smart.util.ErrorCode.*;
@@ -89,6 +88,18 @@ public class FurnitureController {
         }
     }
 
+    @PostMapping("/queryFurnitureByUserId")
+    public Result<List<Furniture>> queryFurnitureByUserId(@RequestBody Map<String, Long> requestBody) {
+        Long userId = requestBody.get("userId");
+        List<Furniture> furnitureList = furnitureService.queryFurniturnByUserId(Math.toIntExact(userId));
+        if (!furnitureList.isEmpty()) {
+            return Result.success(furnitureList, "查询成功！");
+        } else {
+            return Result.error(ErrorCode.valueOf("未找到该用户的家具。"));
+        }
+    }
+
+
 
     @PostMapping("/updateFur")
     public ResponseEntity<Result> updateFurniture(@RequestBody Furniture updatedFurniture) {
@@ -100,24 +111,6 @@ public class FurnitureController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Result.error(ErrorCode.valueOf("未找到要更新的家具。")));
         }
     }
-
-    @GetMapping("/scheduled-tasks/{furnitureId}")
-    public List<ScheduledTask> getScheduledTasks(@PathVariable Long furnitureId) {
-        return furnitureService.getScheduledTasks(furnitureId);
-    }
-
-    @PostMapping("/schedule-task/{furnitureId}")
-    public ScheduledTask scheduleTask(@PathVariable Long furnitureId, @RequestBody LocalDateTime startTime) {
-        return furnitureService.scheduleTask(furnitureId, startTime);
-    }
-
-    @PostMapping("/cancel-scheduled-task/{taskId}")
-    public void cancelScheduledTask(@PathVariable Long taskId) {
-        furnitureService.cancelScheduledTask(taskId);
-    }
-
-
-
     private String generateErrorMessage(List<FieldError> fieldErrors) {
         StringBuilder errorMessage = new StringBuilder();
         for (FieldError fieldError : fieldErrors) {

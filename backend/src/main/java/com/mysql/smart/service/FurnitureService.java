@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.List;
+
 public interface FurnitureService  {
 
     Furniture addFurniture(Furniture furniture);
@@ -18,4 +20,5 @@ public interface FurnitureService  {
 
     void cancelScheduledTask(Long taskId);
 
+    List<Furniture> queryFurniturnByUserId(int userid);
 }
