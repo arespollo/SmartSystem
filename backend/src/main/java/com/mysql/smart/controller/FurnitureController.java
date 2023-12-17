@@ -44,7 +44,7 @@ public class FurnitureController {
     @Autowired
     private FurnitureService furnitureService;
     @PostMapping("/addFur")
-    public Result addFurniture(@RequestBody Furniture furniture, BindingResult bindingResult) {
+    public Result<Furniture> addFurniture(@RequestBody Furniture furniture, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // 处理数据校验错误
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -68,7 +68,6 @@ public class FurnitureController {
             String errorMessage = generateErrorMessage(fieldErrors);
             return Result.error(valueOf(errorMessage));
         }
-
         Furniture fur = furnitureService.delFurniture(furniture);
         if (fur != null) {
             return Result.success(fur, "删除成功！");
@@ -88,9 +87,9 @@ public class FurnitureController {
     }
 
 
-    @PostMapping("/updateFur/{id}")
-    public ResponseEntity<Result> updateFurniture(@PathVariable Integer id, @RequestBody Furniture updatedFurniture) {
-        Furniture updated = furnitureService.updateFurniture(id, updatedFurniture);
+    @PostMapping("/updateFur")
+    public ResponseEntity<Result> updateFurniture(@RequestBody Furniture updatedFurniture) {
+        Furniture updated = furnitureService.updateFurniture(updatedFurniture);
 
         if (updated != null) {
             return ResponseEntity.ok(Result.success(updated, "更新成功！"));

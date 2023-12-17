@@ -32,5 +32,6 @@ public interface FurnitureDao extends JpaRepository<Furniture,Long> {
         // 如果找不到具有给定ID的家具，返回null或引发异常
         return null;
     }*/
+
 }
 

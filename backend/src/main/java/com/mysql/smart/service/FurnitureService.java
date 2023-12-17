@@ -6,7 +6,6 @@ public interface FurnitureService  {
     Furniture addFurniture(Furniture furniture);
     Furniture delFurniture(Furniture furniture);
     Furniture queryFurniture(Furniture furniture);
+    Furniture updateFurniture(Furniture updatedFurniture);
 
-
-    Furniture updateFurniture(int furnitureId, Furniture updatedFurniture);
 }

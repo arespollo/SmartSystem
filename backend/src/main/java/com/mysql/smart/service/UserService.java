@@ -11,11 +11,11 @@ public interface UserService {
     User login(String username, String password);
 
     // 根据用户名查找用户
-    User findByUsername(String username);
+    /*User findByUsername(String username);
 
     // 其他可能的业务方法
     // ...
     User updateSceneStatus(long id,String scene,int status);
 
-    User querySceneStatus(long id);
+    User querySceneStatus(long id);*/
 }

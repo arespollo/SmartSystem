@@ -38,28 +38,37 @@ public class UserController {
         }
     }
 
-    @PostMapping("/update-scene")
+    /*@PostMapping("/update-scene")
     public Result<User> updatescene(@RequestBody Map<String,Object>fields){
-        int id=(int)fields.get("id");
+        Object idObj = fields.get("id");
+        if (!(idObj instanceof Integer)) {
+            return Result.error("103", "id 参数类型错误！");
+        }
+        int id = (int) idObj;
         String field = (String) fields.get("scene");
         int value = (int) fields.get("status");
         User updatedscene = userService.updateSceneStatus(id, field, value);
         if (updatedscene != null) {
             return Result.success(updatedscene, "更新成功！");
         } else {
-            return Result.error("103", "更新失败！");
+            return Result.error("104", "更新失败！");
         }
     }
 
     @PostMapping("/query-scene")
     public Result<User> queryscene(@RequestBody Map<String,Object>fields){
-        int id=(int)fields.get("id");
+        Object idObj = fields.get("id");
+        //参数校验
+        if (!(idObj instanceof Integer)) {
+            return Result.error("103", "id 参数类型错误！");
+        }
+        int id = (int) idObj;
         User user1=userService.querySceneStatus(id);
         if(user1!=null){
             return Result.success(user1,"查询成功");
         } else{
-            return Result.error("104", "查询失败！");
+            return Result.error("105", "查询失败！");
         }
-    }
+    }*/
 
 }

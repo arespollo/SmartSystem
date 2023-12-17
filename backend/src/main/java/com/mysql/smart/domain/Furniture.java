@@ -30,13 +30,6 @@ public class Furniture {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public int getRoomId() {
         return roomId;
@@ -46,18 +39,35 @@ public class Furniture {
         this.roomId = roomId;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 255)
     private String type;
     @Column
-
     private int status;
+    @Column
+    private String name;
     //@NotBlank(message = "名称不能为空")
-    @Column(length = 255)
-    private String location;
+    @Column
     private int roomId;
 
-    // 构造方法、getter和setter省略
+    public Furniture(String type, int status, String name, int roomId) {
+        this.type = type;
+        this.status = status;
+        this.name = name;
+        this.roomId = roomId;
+    }
+    public Furniture(){
+
+    }
+// 构造方法、getter和setter省略
 }

@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
+    /*@Override
     public User findByUsername(String username) {
         return userDao.findByUserName(username).orElse(null);
     }
@@ -69,6 +69,6 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return null;
-    }
+    }*/
 
 }
