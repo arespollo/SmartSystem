@@ -47,10 +47,13 @@ public class FurnitureServicempl implements FurnitureService{
     }
 
     @Override
-    public Optional<Furniture> queryFurniture(Furniture furniture) {
-        //furnitureDao.findById(furniture.getId());
-        //System.out.println("查找到家具：" + furniture.getId()+furniture.getName()+furniture.getType());
-        return furnitureDao.findById(furniture.getId());
+    public Optional<Furniture> queryFurniture(int id) {
+        if(furnitureDao.findById((long) id).isPresent()){
+            return furnitureDao.findById((long) id);
+        }
+        else{
+            return null;
+        }
     }
 
 

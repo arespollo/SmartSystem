@@ -12,7 +12,7 @@ public interface FurnitureService  {
 
     Furniture addFurniture(Furniture furniture);
     Furniture delFurniture(Furniture furniture);
-    Optional<Furniture> queryFurniture(Furniture furniture);
+    Optional<Furniture> queryFurniture(int id);
     Furniture updateFurniture(Furniture updatedFurniture);
     List<ScheduledTask> getScheduledTasks(Long furnitureId);
 

@@ -7,12 +7,12 @@ public enum ErrorCode {
 
     ADDFUR_ERROR(103, "增加家具失败"),
     DELFUR_ERROR(104, "删除家具失败"),
-
+    QUERY_ERROR(105, "查询家具失败"),
     NO_PERMISSION(701, "无访问权限"),
     TOKEN_ERROR(901, "Toekn不合法"),
     SESSION_TIME_OUT(902, "会话超时"),
-    NO_LOGIN(903, "未登录"),
-    ;
+    NO_LOGIN(903, "未登录");
+
 
     private String code;
 

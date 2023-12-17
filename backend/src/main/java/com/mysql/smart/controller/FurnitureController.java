@@ -79,12 +79,13 @@ public class FurnitureController {
     }
 
     @PostMapping("/queryFur")
-    public Result queryFurniture(@RequestBody Furniture furniture) {
-        Optional<Furniture> fur = furnitureService.queryFurniture(furniture);
+    public Result queryFurniture(@RequestBody Map<String, Integer> requestBody) {
+        int id = requestBody.get("id");
+        Optional<Furniture> fur = furnitureService.queryFurniture(id);
         if (fur != null) {
             return Result.success(fur, "查找成功！");
         } else {
-            return Result.error(DELFUR_ERROR);
+            return Result.error(QUERY_ERROR);
         }
     }
 
