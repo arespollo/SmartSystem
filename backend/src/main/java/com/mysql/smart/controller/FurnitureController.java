@@ -5,6 +5,7 @@ import com.mysql.smart.domain.Furniture;
 import com.mysql.smart.service.FurnitureService;
 import com.mysql.smart.util.ErrorCode;
 import com.mysql.smart.util.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import static com.mysql.smart.util.ErrorCode.*;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/secure/furniture")
 public class FurnitureController {
@@ -90,9 +94,12 @@ public class FurnitureController {
     }
 
     @PostMapping("/queryFurnitureByUserId")
-    public Result<List<Furniture>> queryFurnitureByUserId(@RequestBody Map<String, Long> requestBody) {
-        Long userId = requestBody.get("userId");
-        List<Furniture> furnitureList = furnitureService.queryFurniturnByUserId(Math.toIntExact(userId));
+    public Result<List<Furniture>> queryFurnitureByUserId(@RequestAttribute("id") Integer userId) {
+        if (userId == null) {
+            return Result.error(ErrorCode.valueOf("用户ID未找到。"));
+        }
+
+        List<Furniture> furnitureList = furnitureService.queryFurniturByUserId(userId);
         if (!furnitureList.isEmpty()) {
             return Result.success(furnitureList, "查询成功！");
         } else {

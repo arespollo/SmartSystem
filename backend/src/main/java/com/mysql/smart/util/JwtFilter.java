@@ -3,15 +3,15 @@ package com.mysql.smart.util;
 
 import com.auth0.jwt.interfaces.Claim;
 import lombok.extern.slf4j.Slf4j;
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
-
+import jakarta.servlet.Filter;
 @Slf4j
-@WebFilter(filterName = "JwtFilter", urlPatterns = "api/secure/*")
+@WebFilter(filterName = "JwtFilter", urlPatterns = "/api/secure/*")
 public class JwtFilter implements Filter
 {
     @Override
@@ -25,8 +25,12 @@ public class JwtFilter implements Filter
 
         response.setCharacterEncoding("UTF-8");
         //获取 header里的token
-        final String token = request.getHeader("authorization");
-
+        String token = request.getHeader("authorization");
+        //判断token前缀是否为Bearer，若是则去掉前缀
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+        log.info("token:{}", token);
         if ("OPTIONS".equals(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             chain.doFilter(request, response);

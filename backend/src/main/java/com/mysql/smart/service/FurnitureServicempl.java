@@ -117,7 +117,7 @@ public class FurnitureServicempl implements FurnitureService{
     }
 
     @Override
-    public List<Furniture> queryFurniturnByUserId(int userid) {
+    public List<Furniture> queryFurniturByUserId(int userid) {
         return furnitureDao.findByUserId(userid);
     }
     /*@Override
