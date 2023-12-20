@@ -111,7 +111,8 @@ public class FurnitureController {
 
 
     @PostMapping("/updateFur")
-    public ResponseEntity<Result> updateFurniture(@RequestBody Furniture updatedFurniture) {
+    public ResponseEntity<Result> updateFurniture(@RequestBody Furniture updatedFurniture, @RequestAttribute("id") Integer userId) {
+        updatedFurniture.setUserId(userId);
         Furniture updated = furnitureService.updateFurniture(updatedFurniture);
 
         if (updated != null) {
