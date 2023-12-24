@@ -59,7 +59,7 @@ public class Scenes {
     }
 
 
-    @OneToMany(mappedBy = "sceneid", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sceneId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SceneFurniture> sceneFurnitureList;
 
     public List<SceneFurniture> getSceneFurnitureList() {

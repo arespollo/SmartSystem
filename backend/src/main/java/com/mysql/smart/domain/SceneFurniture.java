@@ -9,11 +9,11 @@ public class SceneFurniture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private int sceneid;
+    private int sceneId;
     @Column
-    private int furid;
+    private int furId;
     @Column
-    private int furstatus;
+    private int furStatus;
 
     public SceneFurniture() {
     }
@@ -26,40 +26,40 @@ public class SceneFurniture {
         return id;
     }
 
-    public SceneFurniture(int id, int sceneid, int furid, int furstatus) {
+    public SceneFurniture(int id, int sceneId, int furId, int furStatus) {
         this.id = id;
-        this.sceneid = sceneid;
-        this.furid = furid;
-        this.furstatus = furstatus;
+        this.sceneId = sceneId;
+        this.furId = furId;
+        this.furStatus = furStatus;
     }
 
-    public SceneFurniture(int sceneid, int furid, int furstatus) {
-        this.sceneid = sceneid;
-        this.furid = furid;
-        this.furstatus = furstatus;
+    public SceneFurniture(int sceneId, int furId, int furStatus) {
+        this.sceneId = sceneId;
+        this.furId = furId;
+        this.furStatus = furStatus;
     }
 
-    public void setSceneid(int sceneid) {
-        this.sceneid = sceneid;
+    public void setSceneId(int sceneId) {
+        this.sceneId = sceneId;
     }
 
-    public void setFurid(int furid) {
-        this.furid = furid;
+    public void setFurId(int furId) {
+        this.furId = furId;
     }
 
-    public void setFurstatus(int furstatus) {
-        this.furstatus = furstatus;
+    public void setFurStatus(int furStatus) {
+        this.furStatus = furStatus;
     }
 
-    public int getSceneid() {
-        return sceneid;
+    public int getSceneId() {
+        return sceneId;
     }
 
-    public int getFurid() {
-        return furid;
+    public int getFurId() {
+        return furId;
     }
 
-    public int getFurstatus() {
-        return furstatus;
+    public int getFurStatus() {
+        return furStatus;
     }
 }

@@ -75,10 +75,10 @@ public class SceneServicelmpl implements SceneService{
 
             // 更新相关的Furniture实体的status
             for (SceneFurniture sceneFurniture : sceneFurnitureList) {
-                Optional<Furniture> optionalFurniture = furnitureDao.findById((long) sceneFurniture.getFurid());
+                Optional<Furniture> optionalFurniture = furnitureDao.findById((long) sceneFurniture.getFurId());
                 if (optionalFurniture.isPresent()) {
                     Furniture furniture = optionalFurniture.get();
-                    furniture.setStatus(sceneFurniture.getFurstatus());
+                    furniture.setStatus(sceneFurniture.getFurStatus());
                     furnitureDao.save(furniture);
                 }
             }
