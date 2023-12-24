@@ -40,9 +40,10 @@ public class FurnitureServicempl implements FurnitureService{
     }
 
     @Override
-    public Furniture delFurniture(Furniture furniture) {
+    public Furniture  delFurniture(Furniture furniture) {
         furnitureDao.delete(furniture);
         //System.out.println("删除家具：" + furniture.getId()+furniture.getLocation()+furniture.getLocation());
+
         return furniture;
     }
 
@@ -94,8 +95,6 @@ public class FurnitureServicempl implements FurnitureService{
         return scheduledTaskDao.findByFurnitureId(furnitureId);
     }
 
-
-
     @Override
     public ScheduledTask scheduleTask(Long furnitureId, LocalDateTime startTime) {
         Furniture furniture = furnitureDao.findById(furnitureId).orElse(null);
@@ -117,7 +116,7 @@ public class FurnitureServicempl implements FurnitureService{
     }
 
     @Override
-    public List<Furniture> queryFurniturnByUserId(int userid) {
+    public List<Furniture> queryFurniturByUserId(int userid) {
         return furnitureDao.findByUserId(userid);
     }
     /*@Override

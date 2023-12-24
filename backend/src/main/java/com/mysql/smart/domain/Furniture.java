@@ -37,8 +37,8 @@ public class Furniture {
         return userId;
     }
 
-    public void setUserId(int roomId) {
-        this.userId = roomId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setName(String name) {

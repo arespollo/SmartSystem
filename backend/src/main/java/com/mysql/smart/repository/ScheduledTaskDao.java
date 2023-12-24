@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ScheduledTaskDao extends JpaRepository<ScheduledTask, Long> {
     List<ScheduledTask> findByFurnitureId(Long furnitureId);
-    // 可根据业务需要添加自定义查询方法
+
 }
