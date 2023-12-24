@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "furniture_history")
-public class FurnitureHistory {
+@Table(name = "history")
+public class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,13 @@ public class FurnitureHistory {
     @Column(nullable = false)
     private int userId;
 
-    public FurnitureHistory(int id, LocalDateTime date, String operation, int userId) {
+    public History(int id, LocalDateTime date, String operation, int userId) {
         this.id = id;
         this.date = date;
         this.operation = operation;
         this.userId = userId;
     }
-    public FurnitureHistory() {
+    public History() {
 
     }
     public int getId() {

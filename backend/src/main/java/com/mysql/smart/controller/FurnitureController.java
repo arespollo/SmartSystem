@@ -2,9 +2,9 @@ package com.mysql.smart.controller;
 
 import com.mysql.smart.domain.Furniture;
 
-import com.mysql.smart.domain.FurnitureHistory;
+import com.mysql.smart.domain.History;
 import com.mysql.smart.domain.ScheduledTask;
-import com.mysql.smart.service.FurnitureHistoryService;
+import com.mysql.smart.service.HistoryService;
 import com.mysql.smart.service.FurnitureService;
 import com.mysql.smart.util.ErrorCode;
 import com.mysql.smart.util.Result;
@@ -16,9 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,7 +28,7 @@ import static com.mysql.smart.util.ErrorCode.*;
 @RequestMapping("/api/secure/furniture")
 public class FurnitureController {
     @Autowired
-    private FurnitureHistoryService historyService;
+    private HistoryService historyService;
 
     /*@Autowired
     private FurnitureService furnitureService;
@@ -58,7 +56,7 @@ public class FurnitureController {
     private FurnitureService furnitureService;
 
     @PostMapping("/addFur")
-    public Result<FurnitureHistory> addFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
+    public Result<History> addFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // 处理数据校验错误
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -70,8 +68,8 @@ public class FurnitureController {
 
 
         // 添加历史记录
-        FurnitureHistory history = new FurnitureHistory();
-        history.setOperation("新增");
+        History history = new History();
+        history.setOperation(String.format("Add Furniture %s  (Type: %s)", fur.getName(), fur.getType()));
         history.setUserId(userId); // 假设有变量 userId 存储当前用户ID
         historyService.addHistory(history);
         if (fur != null) {
@@ -84,7 +82,7 @@ public class FurnitureController {
     }
 
     @PostMapping("/delFur")
-    public Result<FurnitureHistory> delFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
+    public Result<History> delFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // 处理数据校验错误
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -96,8 +94,8 @@ public class FurnitureController {
 
 
         // 添加历史记录
-        FurnitureHistory history = new FurnitureHistory();
-        history.setOperation("删除");
+        History history = new History();
+        history.setOperation(String.format("Delete Furniture %s  (Type: %s)", fur.getName(), fur.getType()));
         history.setUserId(userId);
         historyService.addHistory(history);
 
@@ -148,8 +146,8 @@ public class FurnitureController {
 
 
         // 添加历史记录
-        FurnitureHistory history = new FurnitureHistory();
-        history.setOperation("更新");
+        History history = new History();
+        history.setOperation(String.format("Update Furniture %s  (Type: %s)  (Status: %s)", updated.getName(), updated.getType(), updated.getStatus() == 1 ? "On" : "Off"));
         history.setUserId(userId);
         historyService.addHistory(history);
 

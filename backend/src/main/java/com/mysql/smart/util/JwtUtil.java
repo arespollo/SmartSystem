@@ -15,14 +15,9 @@ import java.util.Map;
 
 public class JwtUtil {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
-    /**
-     * 密钥
-     */
+
     private static final String SECRET = "321***dyjlchhzt123***";
 
-    /**
-     * 过期时间
-     **/
     private static final long EXPIRATION = 21600L;//单位为秒   设置为6小时
 
     /**
