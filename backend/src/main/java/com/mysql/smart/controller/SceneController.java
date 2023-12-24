@@ -55,7 +55,7 @@ public class SceneController {
         if (updatedScene != null) {
             return Result.success(updatedScene, "更新场景成功！");
         } else {
-            return Result.error("104", "更新场景失败！");
+            return Result.success("关闭场景成功！");
         }
     }
 }

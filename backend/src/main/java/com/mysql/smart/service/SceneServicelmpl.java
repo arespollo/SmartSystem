@@ -52,7 +52,7 @@ public class SceneServicelmpl implements SceneService{
     @Override
     public Scenes updateSceneStatus(int sceneId, int newStatus) {
         Optional<Scenes> optionalScene = scenesDao.findById((long) sceneId);
-        if (optionalScene.isPresent()) {
+        if (optionalScene.isPresent()&&newStatus!=0) {
             Scenes scene = optionalScene.get();
             scene.setStatus(newStatus);
 
@@ -64,7 +64,7 @@ public class SceneServicelmpl implements SceneService{
                 Optional<Furniture> optionalFurniture = furnitureDao.findById((long) sceneFurniture.getFurid());
                 if (optionalFurniture.isPresent()) {
                     Furniture furniture = optionalFurniture.get();
-                    furniture.setStatus(newStatus);
+                    furniture.setStatus(sceneFurniture.getFurstatus());
                     furnitureDao.save(furniture);
                 }
             }
