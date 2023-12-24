@@ -13,16 +13,16 @@ public class Scenes {
     @Column
     private String name;
     @Column
-    private int userid;
+    private int userId;
     @Column
     private int status;
     public Scenes(){
 
     }
-    public Scenes(int id, String name, int userid, int status) {
+    public Scenes(int id, String name, int userId, int status) {
         this.id = id;
         this.name = name;
-        this.userid = userid;
+        this.userId = userId;
         this.status = status;
     }
 
@@ -34,8 +34,8 @@ public class Scenes {
         return name;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
     public int getStatus() {
@@ -50,8 +50,8 @@ public class Scenes {
         this.name = name;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setStatus(int status) {

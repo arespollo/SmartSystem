@@ -4,15 +4,13 @@ import com.mysql.smart.domain.Scenes;
 import com.mysql.smart.service.SceneService;
 import com.mysql.smart.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/scene")
+@RequestMapping("/api/secure/scene")
 public class SceneController {
     @Autowired
     private SceneService sceneService;
@@ -43,7 +41,16 @@ public class SceneController {
         if (scene != null) {
             return Result.success(scene, "获取场景成功！");
         } else {
-            return Result.error("103", "获取场景失败！");
+            return Result.error("104", "获取场景失败！");
+        }
+    }
+    @PostMapping("/queryScene")
+    public Result<List<Scenes>> queryScene(@RequestAttribute("id") Integer userId) {
+        List<Scenes> scene = sceneService.findByUserId(userId);
+        if (scene != null) {
+            return Result.success(scene, "获取场景成功！");
+        } else {
+            return Result.error("104", "获取场景失败！");
         }
     }
 

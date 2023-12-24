@@ -3,6 +3,7 @@ package com.mysql.smart.service;
 import com.mysql.smart.domain.SceneFurniture;
 import com.mysql.smart.domain.Scenes;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface SceneService {
@@ -15,6 +16,8 @@ public interface SceneService {
     SceneFurniture delSF(SceneFurniture sceneFurniture);
 
     Optional<Scenes> findByid(int id);
+
+    List<Scenes> findByUserId(long userid);
 
     Scenes updateSceneStatus(int sceneId, int newStatus);
 }

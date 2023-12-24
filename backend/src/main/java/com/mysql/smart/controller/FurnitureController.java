@@ -145,59 +145,12 @@ public class FurnitureController {
         updatedFurniture.setUserId(userId);
         Furniture updated = furnitureService.updateFurniture(updatedFurniture);
 
-
-
-        // 添加历史记录
-        FurnitureHistory history = new FurnitureHistory();
-        history.setOperation("更新");
-        history.setUserId(userId);
-        historyService.addHistory(history);
-
         if (updated != null) {
             return ResponseEntity.ok(Result.success(updated, "更新成功！"));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Result.error(ErrorCode.valueOf("未找到要更新的家具。")));
         }
-
-
-
-
-
     }
-
-
-    @GetMapping("/scheduled-tasks/{furnitureId}")
-    public List<ScheduledTask> getScheduledTasks(@PathVariable Long furnitureId) {
-        return furnitureService.getScheduledTasks(furnitureId);
-    }
-
-
-
-    @PostMapping("/schedule-task")
-    public ScheduledTask scheduleTask(@RequestBody ScheduledTask.ScheduleTaskRequest request) {
-        Long furnitureId = request.getFurnitureId();
-        LocalDateTime startTime = request.getStartTime();
-        // 调用服务方法并返回结果
-        return furnitureService.scheduleTask(furnitureId, startTime);
-    }
-
-    /*@PostMapping("/schedule-task/{furnitureId}")
-    public ScheduledTask scheduleTask(@PathVariable Long furnitureId, @RequestBody String startTimeString) {
-        LocalDateTime startTime = LocalDateTime.parse(startTimeString, DateTimeFormatter.ISO_DATE_TIME);
-        return furnitureService.scheduleTask(furnitureId, startTime);
-    }*/
-
-    /*@PostMapping("/schedule-task/{furnitureId}")
-    public ScheduledTask scheduleTask(@PathVariable Long furnitureId, @RequestBody LocalDateTime startTime) {
-        return furnitureService.scheduleTask(furnitureId, startTime);
-    }*/
-
-    @PostMapping("/cancel-scheduled-task/{taskId}")
-    public void cancelScheduledTask(@PathVariable Long taskId) {
-        furnitureService.cancelScheduledTask(taskId);
-    }
-
-
     private String generateErrorMessage(List<FieldError> fieldErrors) {
         StringBuilder errorMessage = new StringBuilder();
         for (FieldError fieldError : fieldErrors) {

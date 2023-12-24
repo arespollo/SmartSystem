@@ -58,6 +58,12 @@ public class SceneServicelmpl implements SceneService{
     }
 
     @Override
+    public List<Scenes> findByUserId(long userid) {
+        return scenesDao.findByUserId(userid);
+    }
+
+
+    @Override
     public Scenes updateSceneStatus(int sceneId, int newStatus) {
         Optional<Scenes> optionalScene = scenesDao.findById((long) sceneId);
         if (optionalScene.isPresent()&&newStatus!=0) {
