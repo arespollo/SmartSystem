@@ -28,7 +28,15 @@ public class SceneServicelmpl implements SceneService{
 
     @Override
     public Scenes delScene(Scenes scenes) {
-        scenesDao.delete(scenes);
+        Optional<Scenes> optionalScenes = scenesDao.findById((long)scenes.getId());
+        if (optionalScenes.isPresent()) {
+            Scenes scene = optionalScenes.get();
+            List<SceneFurniture> sceneFurnitureList = scene.getSceneFurnitureList();
+            if (sceneFurnitureList != null && !sceneFurnitureList.isEmpty()) {
+                sceneFurnitureDao.deleteAll(sceneFurnitureList);
+            }
+            scenesDao.delete(scene);
+        }
         return null;
     }
 
