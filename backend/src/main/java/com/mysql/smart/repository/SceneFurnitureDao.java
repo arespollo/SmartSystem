@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface SceneFurnitureDao extends JpaRepository<SceneFurniture,Long> {
-    List<SceneFurniture> findBySceneid(int id);
+    List<SceneFurniture> findBySceneId(int id);
 
 }
