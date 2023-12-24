@@ -63,7 +63,9 @@ public class Furniture {
     private int userId;
     @OneToMany(mappedBy = "furniture", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduledTask> scheduledTasks;
-
+    public void updateStatus(int status) {
+        this.status = status;
+    }
 
     public Furniture(String type, int status, String name, int userId) {
         this.type = type;

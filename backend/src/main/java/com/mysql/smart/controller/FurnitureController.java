@@ -20,29 +20,6 @@ import static com.mysql.smart.util.ErrorCode.*;
 @RestController
 @RequestMapping("/api/secure/furniture")
 public class FurnitureController {
-
-    /*@Autowired
-    private FurnitureService furnitureService;
-    @PostMapping("/addFur")
-    public Result<Furniture> addFurniture(@RequestBody Furniture furniture) {
-        Furniture fur = furnitureService.addFurniture(furniture);
-        if (fur != null) {
-            return Result.success(fur, "增加成功！");
-        } else {
-            return Result.error(ADDFUR_ERROR);
-        }
-    }
-
-    @PostMapping("/delFur")
-    public Result<Furniture> delFurniture(@RequestBody Furniture furniture) {
-        Furniture fur = furnitureService.delFurniture(furniture);
-        if (fur != null) {
-            return Result.success(fur, "删除成功！");
-        } else {
-            return Result.error(DELFUR_ERROR);
-        }
-    }*/
-
     @Autowired
     private FurnitureService furnitureService;
     @PostMapping("/addFur")
@@ -105,7 +82,6 @@ public class FurnitureController {
     @PostMapping("/updateFur")
     public ResponseEntity<Result> updateFurniture(@RequestBody Furniture updatedFurniture) {
         Furniture updated = furnitureService.updateFurniture(updatedFurniture);
-
         if (updated != null) {
             return ResponseEntity.ok(Result.success(updated, "更新成功！"));
         } else {
