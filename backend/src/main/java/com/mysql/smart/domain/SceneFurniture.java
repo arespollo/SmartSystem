@@ -7,22 +7,42 @@ import jakarta.persistence.*;
 public class SceneFurniture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column
     private int sceneId;
     @Column
     private int furId;
     @Column
     private int furStatus;
+    @Transient
+    private String furName;
+    @Transient
+    private String furType;
 
     public SceneFurniture() {
     }
 
-    public void setId(int id) {
+    public String getFurName() {
+        return furName;
+    }
+
+    public void setFurName(String furName) {
+        this.furName = furName;
+    }
+
+    public String getFurType() {
+        return furType;
+    }
+
+    public void setFurType(String furType) {
+        this.furType = furType;
+    }
+
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -56,7 +56,7 @@ public class FurnitureController {
     private FurnitureService furnitureService;
 
     @PostMapping("/addFur")
-    public Result<History> addFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
+    public Result<Furniture> addFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // 处理数据校验错误
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -73,7 +73,7 @@ public class FurnitureController {
         history.setUserId(userId); // 假设有变量 userId 存储当前用户ID
         historyService.addHistory(history);
         if (fur != null) {
-            return Result.success(history, "增加成功！");
+            return Result.success(fur, "增加成功！");
         } else {
             return Result.error(ADDFUR_ERROR);
         }
@@ -82,7 +82,7 @@ public class FurnitureController {
     }
 
     @PostMapping("/delFur")
-    public Result<History> delFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
+    public Result<Furniture> delFurniture(@RequestBody Furniture furniture, @RequestAttribute("id") Integer userId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // 处理数据校验错误
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -92,7 +92,6 @@ public class FurnitureController {
         furniture.setUserId(userId);
         Furniture fur = furnitureService.delFurniture(furniture);
 
-
         // 添加历史记录
         History history = new History();
         history.setOperation(String.format("Delete Furniture %s  (Type: %s)", fur.getName(), fur.getType()));
@@ -101,7 +100,7 @@ public class FurnitureController {
 
 
         if (fur != null) {
-            return Result.success(history, "删除成功！");
+            return Result.success(fur, "删除成功！");
         } else {
             return Result.error(DELFUR_ERROR);
         }

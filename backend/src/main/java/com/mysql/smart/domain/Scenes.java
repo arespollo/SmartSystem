@@ -16,6 +16,9 @@ public class Scenes {
     private int userId;
     @Column
     private int status;
+
+    @OneToMany(mappedBy = "sceneId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SceneFurniture> sceneFurnitureList;
     public Scenes(){
 
     }
@@ -57,10 +60,6 @@ public class Scenes {
     public void setStatus(int status) {
         this.status = status;
     }
-
-
-    @OneToMany(mappedBy = "sceneId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SceneFurniture> sceneFurnitureList;
 
     public List<SceneFurniture> getSceneFurnitureList() {
         return sceneFurnitureList;

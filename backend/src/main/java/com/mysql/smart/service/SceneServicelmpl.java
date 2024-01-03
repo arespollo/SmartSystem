@@ -53,15 +53,43 @@ public class SceneServicelmpl implements SceneService{
     }
 
     @Override
+    public SceneFurniture updateSF(SceneFurniture sceneFurniture) {
+        sceneFurnitureDao.save(sceneFurniture);
+        return sceneFurniture;
+    }
+    @Override
     public Optional<Scenes> findByid(int id) {
-        return scenesDao.findById((long)id);
+        Optional<Scenes> sceneOpt = scenesDao.findById((long)id);
+
+        if (sceneOpt.isPresent()) {
+            Scenes scene = sceneOpt.get();
+            for (SceneFurniture sceneFurniture : scene.getSceneFurnitureList()) {
+                Optional<Furniture> furniture = furnitureDao.findById((long)sceneFurniture.getFurId());
+                furniture.ifPresent(f -> {
+                    sceneFurniture.setFurName(f.getName());
+                    sceneFurniture.setFurType(f.getType());
+                });
+            }
+        }
+
+        return sceneOpt;
     }
 
     @Override
-    public List<Scenes> findByUserId(long userid) {
-        return scenesDao.findByUserId(userid);
+    public List<Scenes> findByUserId(long userId) {
+        List<Scenes> scenes = scenesDao.findByUserId(userId);
+        for (Scenes scene : scenes) {
+            for (SceneFurniture sceneFurniture : scene.getSceneFurnitureList()) {
+                Optional<Furniture> furniture = furnitureDao.findById((long)sceneFurniture.getFurId());
+                System.out.println(sceneFurniture.getFurId());
+                furniture.ifPresent(f -> {
+                    sceneFurniture.setFurName(f.getName());
+                    sceneFurniture.setFurType(f.getType());
+                });
+            }
+        }
+        return scenes;
     }
-
 
     @Override
     public Scenes updateSceneStatus(int sceneId, int newStatus) {

@@ -30,4 +30,13 @@ public class SceneFurnitureController {
         }
     }
 
+    @PostMapping("/updateSceneFurniture")
+    public Result<SceneFurniture> updateSceneFurniture(@RequestBody SceneFurniture sceneFurniture) {
+        SceneFurniture updatedSceneFurniture=sceneService.updateSF(sceneFurniture);
+        if (updatedSceneFurniture!=null) {
+            return Result.success(updatedSceneFurniture);
+        } else {
+            return Result.error("105", "更新失败！");
+        }
+    }
 }

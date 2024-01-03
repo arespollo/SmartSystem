@@ -16,7 +16,9 @@ public class SceneController {
     private SceneService sceneService;
 
     @PostMapping("/addScene")
-    public Result<Scenes> addScene(@RequestBody Scenes scenes) {
+    public Result<Scenes> addScene(@RequestBody Scenes scenes, @RequestAttribute("id") Integer userId) {
+        scenes.setUserId(userId);
+        scenes.setStatus(0);
         Scenes addedScene = sceneService.addScene(scenes);
         if (addedScene != null) {
             return Result.success(addedScene, "添加场景成功！");
@@ -26,7 +28,8 @@ public class SceneController {
     }
 
     @PostMapping("/delScene")
-    public Result<Scenes> delScene(@RequestBody Scenes scenes) {
+    public Result<Scenes> delScene(@RequestBody Scenes scenes, @RequestAttribute("id") Integer userId) {
+        scenes.setUserId(userId);
         Scenes deletedScene = sceneService.delScene(scenes);
         if (deletedScene == null) {
             return Result.success(deletedScene, "删除场景成功！");

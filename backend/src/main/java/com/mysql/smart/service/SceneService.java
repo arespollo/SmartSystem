@@ -11,6 +11,7 @@ public interface SceneService {
 
     Scenes delScene(Scenes scenes);
 
+    SceneFurniture updateSF(SceneFurniture sceneFurniture);
     SceneFurniture addSF(SceneFurniture sceneFurniture);
 
     SceneFurniture delSF(SceneFurniture sceneFurniture);

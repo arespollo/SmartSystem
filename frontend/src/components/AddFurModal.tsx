@@ -79,6 +79,7 @@ const AddFurModal: React.FC<AddFurnitureModalProps> = ({ addFurniture }) => {
           <Option value="Television">Television</Option>
           <Option value="AirConditioner">Air Conditioner</Option>
           <Option value="Lamp">Lamp</Option>
+          <Option value="Router">Router</Option>
         </Select>
         {/* <Select
           placeholder="Select Room"
